@@ -62,7 +62,7 @@ async def pubg_record(msg, view, server, coop, ingame):
         params = {"filter[playerNames]": ""}
         params["filter[playerNames]"] = nickname
         headers = {"Accept": "application/vnd.api+json",
-                   "Authorization": "Input Your Authorization"}
+                   "Authorization": "Input your Auth"}
 
         response = requests.get(playerURL, headers=headers, params=params)
 
@@ -98,7 +98,10 @@ async def pubg_record(msg, view, server, coop, ingame):
         losses = roundPlayed - top10
         top10 = top10 - wins
         winrate = round(wins / roundPlayed * 100, 1)
-        kd = round(kills / (roundPlayed - wins), 2)
+        if roundPlayed - wins <= 0:
+            kd = 'Perfect!'
+        else:
+            kd = round(kills / (roundPlayed - wins), 2)
         longest = round(longest, 1)
         dealTotal = int(dealTotal / roundPlayed)
         if int(kills) == 0:

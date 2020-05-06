@@ -14,7 +14,7 @@ from div_team import divide_team, show_team_result
 from admin_mention import men_master, men_submaster, men_admin, men_subadmin, men_staff, men_designer, men_botmanager
 
 app = discord.Client()
-token = "your bot token"                                                # 비공개 토큰으로 공백처리
+token = "Input your bot token"                                          # 비공개 토큰으로 공백처리
 ch_member = []                                                          # 채널 멤버 가져오는 리스트
 icon = 'https://i.imgur.com/lgfwo6J.jpg'
 queue = {}
@@ -31,7 +31,7 @@ async def on_ready():
     print(app.user.name)
     print(app.user.id)
     print('===================')
-    await app.change_presence(activity=discord.Game('DJ Sona 1.2b | 소나버프좀'))
+    await app.change_presence(activity=discord.Game('DJ Sona 1.4b | 노동착취당하는중'))
 
 
 # 서버에 새 멤버가 들어올 시 환영인사와 안내문
@@ -51,13 +51,89 @@ async  def on_member_join(member):
 # 메세지를 받아서 if문을 통해 처리
 @app.event
 async def on_message(message):
+    dambae_time = False
+
     # 메세지를 보낸 대상이 봇이면 무시
     if message.author.bot:
         return None
 
+
+    # 명령어 목록 정리
+    if message.content == '*커맨드':
+        embed = discord.Embed(title='커맨드 목록', description='\n\n안녕하세요:hearts: DJ Sona 입니다.', color=0xffa6c9)
+        embed.set_author(name='DJ Sona', icon_url=icon)
+        #embed.add_field(name='\u200b', value='\u200b', inline=False)
+        embed.add_field(name='호출 명령어', value='\n\n *마스터 - 마스터를 호출합니다.\n *관리자 - 관리자를 호출합니다.\n *운영진 - 운영진을 호출합니다.\n'
+                                             ' *스태프 - 스태프를 호출합니다.\n *디자이너 - 컴퓨터를 호출합니다.', inline=False)
+        embed.add_field(name='\u200b', value='\u200b', inline=False)
+        embed.add_field(name="게임 관련 명령어",
+                        value="\n\n *팀 x - 해당 음성채널의 인원으로 x명 정원의 커스텀 팀을 랜덤으로 구성합니다. \n\n *모집 - 해당 음성채널의 부족한 인원 수와 위치, 초대 링크를 보냅니다.\n\n "
+                              "*배그 인칭 서버 팀 아이디 - 입력한 아이디의 배그 전적을 보여줍니다.\n예시) *배그 3 스 스 emsang76\n\n *롤 x - 입력한 닉네임 x의 롤 정보를 보여줍니다\n예시) *롤 구해줘요선쉔님",
+                        inline=False)
+        embed.add_field(name='\u200b', value='\u200b', inline=False)
+        embed.add_field(name="부가 커맨드", value='\n\n *주사위 x - 입력한 숫자 안에서 랜덤 숫자를 구합니다.\n\n *투표 x x ... - 스페이스 기준으로 단어를 분할하여 투표를 진행합니다.\n\n *소나 - DJ Sona의 가동 여부를 알려줍니다\n\n *찾기 x - 유튜브에서 x를 검색해 링크를 띄어줍니다.', inline=False)
+        embed.add_field(name='\u200b', value='\u200b', inline=False)
+        embed.add_field(name="부가 기능", value="\n\n 필독 카테고리에 건의사항 등록 시 비공개 게시판으로 전송되며 등록된 메시지는 삭제됩니다.\n\n 신고접수방에 신고 접수 시 비공개 게시판으로 전송되며 운영진들에게 멘션을 띄어줍니다.")
+        embed.add_field(name="* 주의!",
+                        value="\n\n *팀 기능은 권한자외에도 내전채널(클랜멤버 모두 사용가능)에서 사용 할 수 있습니다.\n 권한 : (부)마스터, 관리자, 운영진, 스태프, BOT\n*팀 사용 가능 채널 : 기타게임채팅방, 방송실채팅방\n\n *모집 사용 가능 채널 - 스팀/카배인원모집방, 콜오브듀티채팅방, 기타게임채팅방, 방송실채팅방",
+                        inline=False)
+        embed.add_field(name='\u200b', value='\u200b', inline=False)
+        embed.set_footer(text="DJ Sona v1.4b", icon_url=icon)
+        await message.channel.send(embed=embed)
+
+
+    ### 재미 삼아 노는 곳 ###
+    # if message.author.display_name == '[DR] 김사부' and dambae_time == False:
+    #     whose = discord.utils.find(lambda x : x.id == 546689599729303562, message.guild.members)
+    #     await message.channel.send('{0} <-- 떠들지말고 공부하세요!'.format(whose.mention))
+    #     print('아 남기형 또 채팅하네')
+    #
+    # if message.content == '*담배타임':
+    #     print('담배타임 채팅가능')
+    #     dambae_time = True
+    #
+    # if message.content == '*공부타임':
+    #     print('공부타임 채팅불가')
+    #     dambae_time = False
+
+    # if message.content == '*킥':
+    #     if message.channel.id == 695657221547098132:
+    #         role = discord.utils.find(lambda x : x.name == '동생들', message.guild.roles)
+    #         for mem in message.guild.members:
+    #             if role not in mem.roles:
+    #                 await mem.send("동생들 역할이 없는 사람한테 디엠을 보내요")
+    #                 await mem.kick()
+
+    if message.content == '*매미':
+        await message.channel.send('스피오!\n스피오!')
+
+    if message.content == '*보캣':
+        await message.channel.send('보캣몬의 19금채널\nhttps://bj.afreecatv.com/foavm93')
+
+
+    if message.content == '*일해':
+        role = discord.utils.find(lambda x : x.name == '🔸관리자', message.guild.roles)
+        for mem in message.guild.members:
+            if role in mem.roles:
+                await mem.send("어서 빨리 일해라 노예야 홋치홋치!")
+
+    if message.content == '*떼껄룩':
+        whose = discord.utils.find(lambda  x : x.id == 218010938807287808, message.guild.members)
+        await  message.channel.send('{0}\n띱때끼야 강화 확률 좀 올려라 뒤지기 싫으면'.format(whose.mention))
+
+    if message.content == '*치노':
+        whose = discord.utils.find(lambda x : x.id == 426722888293548032, message.guild.members)
+        await message.channel.send('{0}\n덤벼 치노새끼야'.format(whose.mention))
+
+    if message.content == '*젤리':
+        whose = discord.utils.find(lambda  x : x.id == 423434518029008896, message.guild.members)
+        await message.channel.send('{0} : 오늘도 퍼먹는 인생...'.format(whose.mention))
+
     if message.content == '*로얄':
         whose = discord.utils.find(lambda  x : x.id == 308585237355692032, message.guild.members)
         await message.channel.send('{0}'.format(whose.mention), file=discord.File('royal.png'))
+        await message.channel.send(file=discord.File('royal2.png'))
+        await message.channel.send(file=discord.File('royal3.png'))
 
     if message.content == '*넉살':
         whose = discord.utils.find(lambda x : x.id == 285695379100532736, message.guild.members)
@@ -65,59 +141,40 @@ async def on_message(message):
 
     if message.content == '*난새':
         whose = discord.utils.find(lambda x: x.id == 394075864045977601, message.guild.members)
-        await message.channel.send('{0} : 오늘도 까이는 인생...'.format(whose.mention))
-
-    # 명령어 목록 정리
-    if message.content == '*커맨드':
-        embed = discord.Embed(title='커맨드 목록', description='\n\n안녕하세요:hearts: DJ Sona 입니다.', color=0xffa6c9)
-        embed.set_author(name='DJ Sona', icon_url=icon)
-        embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.add_field(name='호출 명령어', value='\n\n *마스터 - 마스터를 호출합니다.\n *관리자 - 관리자를 호출합니다.\n *운영진 - 운영진을 호출합니다.\n *스태프 - 스태프를 호출합니다.\n *디자이너 - 컴퓨터를 호출합니다.', inline=False)
-        embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.add_field(name="게임 관련 명령어",
-                        value="\n\n *팀 x - 해당 음성채널의 인원으로 x명 정원의 커스텀 팀을 랜덤으로 구성합니다. \n\n *모집 - 해당 음성채널의 부족한 인원 수와 위치, 초대 링크를 보냅니다.\n\n *투표 x x ... - 스페이스 기준으로 단어를 분할하여 투표를 진행합니다.",
-                        inline=False)
-        embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.add_field(name="부가 커맨드", value='\n\n *주사위 x - 입력한 숫자 안에서 랜덤 숫자를 구합니다.\n\n *소나 - DJ Sona의 가동 여부를 알려줍니다', inline=False)
-        embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.add_field(name="부가 기능", value="\n\n 필독 카테고리에 건의사항 등록 시 비공개 게시판으로 전송되며 등록된 메시지는 삭제됩니다.")
-        embed.add_field(name="* 주의!",
-                        value="\n\n *팀 기능은 권한자외에도 내전채널(클랜멤버 모두 사용가능)에서 사용 할 수 있습니다.\n 권한 : (부)마스터, 관리자, 운영진, 스태프, BOT\n내전채널 : 기타게임채팅방, 방송실채팅방\n\n *모집 사용 가능 채널 - 스팀/카배인원모집방, 콜오브듀티채팅방, 기타게임채팅방, 방송실채팅방",
-                        inline=False)
-        embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.set_footer(text="DJ Sona v1.2b", icon_url=icon)
-        await message.channel.send(embed=embed)
+        await message.channel.send('{0} : 오늘도 게스트하우스 문지기 인생...'.format(whose.mention))
 
 
-    # 가동 여부 확인
+    ### 가동 여부 확인 ###
     if message.content == '*소나':
         embed = discord.Embed(color=0xffa6c9)
         embed.set_author(name='DJ Sona', icon_url=icon)
         embed.add_field(name='소나 대기중!', value='문제 발생 시 😈BOT에게 DM 주세요!')
         embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.set_footer(text='DJ Sona v1.21b', icon_url=icon)
+        embed.set_footer(text='DJ Sona v1.4b', icon_url=icon)
         await message.channel.send(embed=embed)
 
 
+    ### 게스트 유저 닉네임 등록 ###
     if message.channel.id == 690434659980410880:
+        # 메세지 보낸 유저의 제일 높은 등급이 게스트이면
         if message.author.top_role.id == 689833096937603170:
-            guest_role = discord.utils.find(lambda a: a.name == '게스트', message.guild.roles)
+            guest_role = discord.utils.find(lambda a: a.name == '게스트', message.guild.roles)         # 길드에서 게스트 역할을 찾음
 
             try:
-                setting = message.content.split('=')
+                setting = message.content.split('=')                                                   # 입력형식 배그ID(별명/나이)와 성별을 구분하기 위한 구분자
 
-                if len(setting) != 2:
+                if len(setting) != 2:                                                                  # 스플릿 후 리스트 길이가 2가 아니면 예외 발생
                     raise IndexError
 
-                setnick = setting[0]
+                setnick = setting[0]                                                                   # 앞부분을 닉네임으로
 
-                if setting[1] == '남자':
+                if setting[1] == '남자':                                                               # 뒤부분이 남자면 게스트 역할을 제거하고 남성능력자 역할을 부여
                     setrole = discord.utils.find(lambda a : a.id == 654330266856456243, message.guild.roles)
-                    await message.author.edit(nick=setnick)
+                    await message.author.edit(nick=setnick)                                            # 앞부분을 닉네임으로 설정
                     await message.author.add_roles(setrole)
                     await message.author.remove_roles(guest_role)
 
-                elif setting[1] == '여자':
+                elif setting[1] == '여자':                                                             # 뒤부분이 여자면 게스트 역할을 제거하고 여성능력자 역할을 부여
                     setrole = discord.utils.find(lambda  a : a.id == 654328433177919496, message.guild.roles)
                     await message.author.edit(nick=setnick)
                     await message.author.add_roles(setrole)
@@ -142,6 +199,7 @@ async def on_message(message):
     if message.content == '*스태프': await men_staff(message)
     if message.content == '*디자이너': await men_designer(message)
     if message.content == '*봇관리자': await men_botmanager(message)
+
 
     # 지정된 숫자 사이의 랜덤 값 전송
     if message.content.startswith('*주사위'):
@@ -269,21 +327,23 @@ async def on_message(message):
         else:
             await message.channel.send('스팀 또는 카배 모집방에서 이용해주세요!')
 
+
     # 커스텀 관련 사진 전송
     if message.content == '*커스텀':
         await message.channel.send(file=discord.File('custom.jpg'))
 
 
+    # 배그 공식 API를 요청해 배그 전적을 보여줌
     if message.content.startswith('*배그'):
         x = message.content.split()
 
         try:
-            viewPoint = int(x[1])
-            serv = str(x[2])
-            co_op = str(x[3])
-            ingameID = str(x[4])
+            viewPoint = int(x[1])                                               # 1인칭 또는 3인칭 설정
+            serv = str(x[2])                                                    # 스팀 또는 카카오 서버 설정
+            co_op = str(x[3])                                                   # 팀원 수 (솔로, 듀오, 스쿼드) 설정
+            ingameID = str(x[4])                                                # 배그 인게임 ID를 입력
 
-            await pubg_record(message, viewPoint, serv, co_op, ingameID)
+            await pubg_record(message, viewPoint, serv, co_op, ingameID)        # pubg_stat.py의 pubg_record 메소드
 
         except IndexError:
             await message.channel.send("입력 형식이 옳지 않습니다!\n입력 형식은 *배그 인칭(1/3) 서버(스/카) 팀(솔/듀/스) 인게임아이디 입니다!\n예시) *배그 3 스 스 Emsang76")
@@ -292,23 +352,26 @@ async def on_message(message):
             await message.channel.send("입력 형식이 옳지 않습니다!\n입력 형식은 *배그 인칭(1/3) 서버(스/카) 팀(솔/듀/스) 인게임아이디 입니다!\n예시) *배그 3 스 스 Emsang76")
 
 
+    # 롤 공식 API를 요청해 롤 티어 정보를 보여줌
     if message.content.startswith("*롤"):
-        nickname = ''
+        nickname = ''                                   # 롤 닉네임을 받을 변수
+
         x = message.content.split()
-        for i in range(1, len(x)):
-            nickname = nickname + ' ' + x[i]
-
         try:
+            if len(x) == 1:
+                raise ValueError
+
+            for i in range(1, len(x)):
+                nickname = nickname + ' ' + x[i]        # 닉네임에 띄어쓰기가 있을 수 있기에 *롤 뒤에 있는 것들을 연결
+
             lolnick = nickname.strip()
-
-            await lol_record(message, lolnick)
-
-        except IndexError:
-            pass
+            await lol_record(message, lolnick)          # lol_stat.py의 lol_record() 메소드
 
         except ValueError:
-            pass
+            await message.channel.send('입력 형식이 옳지 않습니다!\n입력 형식은 *롤 롤닉네임 입니다!\n예시) *롤 구해줘요선쉔님')
 
+
+    # *삭제 x - x개의 메시지를 삭제합니다.
     if message.content.startswith('*삭제'):
         if message.author.id == 316934997699330048:
             x = message.content.split()
